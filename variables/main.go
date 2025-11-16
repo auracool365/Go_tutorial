@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func add(x int, y int) int {
 	return x + y
@@ -16,7 +19,7 @@ func main() {
 	fmt.Println(!false)
 
 	// Variables
-	// Variable declaration syntax = variable keyword | variable name | data type
+	// Static type declaration = variable keyword | variable name | data type
 	var age int8 = 26
 	fmt.Println(age)
 	fmt.Println("I am", age, "years old")
@@ -33,9 +36,12 @@ func main() {
 	var isGoFun bool = true
 	fmt.Println("Is golang fun?", isGoFun)
 
+	city := "New York"
+	fmt.Printf("The city is %s\n", city)
+
 	// Multiple initialization
-	var a, b, c int = 1, 2, 3
-	fmt.Println("a =", a, "b =", b, "c = ", c)
+	var a, b, c int = 81, 82, 83
+	fmt.Printf("a = %d\nb = %d\nc = %d\n", a, b, c)
 
 	var x float32 = 13.6779
 	var y int8 = 9
@@ -60,7 +66,8 @@ func main() {
 	fmt.Println(num) // outputs 0(same as all other numeric types uint8 - uint64, int8 - int64, floats)
 
 	// Data types can be ignored, the compiler will infer it
-	var animal = "Dog"
+	var animal string
+	animal = "Dog"
 	fmt.Println(animal)
 
 	animal = "Squirrel"
@@ -75,10 +82,11 @@ func main() {
 	fmt.Println(fruit)
 
 	name1, name2 := "Steve", "Wang"
-	fmt.Println(name1, name2)
+	fmt.Println("Hello", name1)
+	fmt.Println("Hello", name2)
 
 	// Constants
-	const speedOfLight int32 = 299792458 // m/s
+	const speedOfLight int32 = 299_792_458 // m/s
 	fmt.Println("The speed of light is", speedOfLight)
 	// speed_of_light = 2767990 // Error! can't reassign a constant
 
@@ -87,5 +95,79 @@ func main() {
 
 	var result2 int = add(4, 6) // Better, the return type is indicated
 	fmt.Println(result2)
+
+	// Check the type of a value(%T)
+	var checkVar1, checkVar2, checkVar3 = "Hey", 3.142, 100
+	fmt.Printf("checkVar1 is of type %T \n", checkVar1)
+	fmt.Printf("checkVar2 is of type %T \n", checkVar2)
+	fmt.Printf("checkVar3 is of type %T \n", checkVar3)
+
+	// Using Blank Specifiers( _ ) to solve unused variables (Go does not allow unused variables)
+	fruit1, fruit2, _ := "Dates", "Banana", "Watermelon" // The blank specifier prevents the unused variable error
+	fmt.Printf("I love %s and %s😋 \n", fruit1, fruit2)
+
+	var _ string = "Nature"
+
+	// Intro to pointers
+	num3 := 9
+	num4 := num3
+
+	// Pointer syntaxes
+	var num3Ptr *int = &num3
+	num4Ptr := &num4
+	testPtr := &num3Ptr // pointer to pointer
+	var zeroValuePtr *int
+
+	num3++
+
+	// *zeroValuePtr += 5 // Very bad(Segmentation fault similar to C++)
+
+	fmt.Println("num3 =", num3)
+	fmt.Println("num4 =", num4)
+
+	fmt.Println("num3Ptr =", num3Ptr)
+	fmt.Println("num3Ptr =", *num3Ptr)
+
+	fmt.Println("num4Ptr =", num4Ptr)
+	fmt.Println("num4Ptr =", *num4Ptr)
+
+	fmt.Println("zeroValuePtr =", zeroValuePtr)
+	// fmt.Println("zeroValuePtr =", *zeroValuePtr) // Very bad
+	fmt.Println()
+
+	*num3Ptr += 5
+	**testPtr += 5
+	*num4Ptr++
+
+	fmt.Println("num3 =", num3)
+	fmt.Println("num4 =", num4)
+
+	fmt.Println("num3Ptr =", num3Ptr)
+	fmt.Println("num3Ptr =", *num3Ptr)
+
+	fmt.Println("num4Ptr =", num4Ptr)
+	fmt.Println("num4Ptr =", *num4Ptr)
+
+	fmt.Println("testPtr =", testPtr)     // address of num3Ptr
+	fmt.Println("*testPtr =", *testPtr)   // address that num3Ptr points to
+	fmt.Println("**testPtr =", **testPtr) // value stored at the address that num3Ptr is pointing to
+	fmt.Println()
+
+	// Pointers usefulness
+	names := [3]string{"Alice", "Charlie", "Bob"}
+	fmt.Println(names)
+	secondName := names[1]     // Copy of the current second element(pass by value) will NOT change
+	secondNamePtr := &names[1] // Address of the current second element(pass by reference) will change
+
+	fmt.Println("The value of secondName is:", secondName)
+	fmt.Println("secondNamePtr:", secondNamePtr)
+	fmt.Println("*secondNamePtr:", *secondNamePtr)
+
+	sort.Strings(names[:])
+	fmt.Println(names)
+
+	fmt.Println("The value of secondName is:", secondName) // Remains unchanged
+	fmt.Println("secondNamePtr:", secondNamePtr)
+	fmt.Println("*secondNamePtr:", *secondNamePtr) // Changed
 
 }

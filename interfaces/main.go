@@ -12,10 +12,12 @@ type Animal interface {
 
 type Dog struct {
 	name string
+	age  int8
 }
 
 type Ostrich struct {
 	name string
+	age  int8
 }
 
 // Methods
@@ -44,13 +46,14 @@ func checkAnimal(animal Animal) {
 }
 
 func main() {
-	dog1 := Dog{name: "Edge"}
-	ostrich1 := Ostrich{name: "Colo"}
+	dog1 := Dog{name: "Edge", age: 2}
+	ostrich1 := Ostrich{name: "Colo", age: 5}
 
 	// Calling the method individually
 	fmt.Println(dog1.sound())
 	dog1.move()
 	fmt.Println()
+
 	fmt.Println(ostrich1.sound())
 	ostrich1.move()
 

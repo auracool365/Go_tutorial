@@ -3,7 +3,6 @@ package main
 import "fmt"
 
 // Struct allows bundling together data that relate to each other in usage, essentially creating a new data type
-
 type Person struct {
 	firstName string
 	lastName  string
@@ -12,8 +11,8 @@ type Person struct {
 	career    CareerPath
 
 	// properties can be added just by type, without a name
-	int
-	Religion
+	int      //id
+	Religion //religion
 }
 
 type CareerPath struct {
@@ -34,7 +33,7 @@ func (person Person) getAge() (string, uint8, string) {
 	return userName, person.age, "years old"
 }
 
-// more logic usage
+// This is a normal function and cannot be attached to the struct objects.
 func canVote(person Person, age uint8) string {
 	if age >= 18 {
 		return person.firstName + " can vote"
@@ -58,7 +57,12 @@ func main() {
 		age       uint8
 		isMale    bool
 		career    CareerPath
-	}{firstName: "Jane", lastName: "Doe", age: 20, isMale: false, career: CareerPath{"Also used in software examples"}}
+	}{firstName: "Jane", // Used immediately
+		lastName: "Doe",
+		age:      20,
+		isMale:   false,
+		career:   CareerPath{"Also used in software examples"},
+	}
 	fmt.Println(person2)
 	fmt.Println(person2.firstName)
 
@@ -75,5 +79,19 @@ func main() {
 	fmt.Println(canVote(person3, person3.age))
 	fmt.Println(canVote(person1, person1.age))
 	// fmt.Println(canVote(person_2, person_2.age)) // Error! since person_2 is not a Person struct. but the value person_2.age can be used
+
+	var person4 Person
+	person4.firstName = "Johnny"
+	person4.lastName = "Joey"
+	person4.age = 20
+	person4.isMale = true
+	person4.career = CareerPath{"Software Engineer"}
+	person4.int = 3
+	person4.religion = "Scientology"
+	fmt.Println(person4)
+	fmt.Println(person4.career.personCareer)
+
+	fmt.Println(person4.getAge())
+	person4.greet()
 
 }

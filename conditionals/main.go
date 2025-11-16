@@ -5,13 +5,13 @@ import (
 	"fmt"
 )
 
-func divide(a int, b int) (int, int, error) {
+func test(a int, b int) (int, int, error) { // Returns 3 things,
 	var err error
 	if b == 0 {
 		err = errors.New("can not divide by zero")
 		return 0, 0, err
 	}
-	return a + b, a * b, err
+	return a + b, a / b, err // returns sum, quotient, error(if any)
 }
 
 func main() {
@@ -39,26 +39,26 @@ func main() {
 		fmt.Println("You are a senior")
 	}
 
-	var sum, product, errorResult = divide(20, 5)
+	var sum, quotient, errorResult = test(20, 5)
 
 	if errorResult != nil {
 		fmt.Println(errorResult.Error())
 	} else {
-		fmt.Println(sum, product)
+		fmt.Printf("The sum from test() is %d \nThe quotient from test() is %d\n", sum, quotient)
 	}
 
 	// Switch statement
 	switch {
 	case errorResult != nil:
 		fmt.Println(errorResult.Error())
-	case sum > product:
-		fmt.Println("Sum", sum, "is greater than product", product)
-	case sum == product:
-		fmt.Println("Sum", sum, "is equal to product", product)
-	case sum < product:
-		fmt.Println("Sum", sum, "is less than product", product)
+	case sum > quotient:
+		fmt.Println("Sum", sum, "is greater than quotient", quotient)
+	case sum == quotient:
+		fmt.Println("Sum", sum, "is equal to quotient", quotient)
+	case sum < quotient:
+		fmt.Println("Sum", sum, "is less than quotient", quotient)
 	default:
-		fmt.Println(sum, product)
+		fmt.Println(sum, quotient)
 	}
 
 	// Switch statements can also have an expression

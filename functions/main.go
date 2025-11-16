@@ -8,7 +8,7 @@ import (
 
 // Takes no parameter, receives no argument, does not return value
 func greet() {
-	fmt.Println("Hello Golang")
+	fmt.Println("Hello Golang!")
 }
 
 // Takes parameter(s), has no return value
@@ -18,6 +18,13 @@ func greetUser(userName string) {
 
 func add(a int32, b int32) {
 	fmt.Println(a + b)
+}
+
+func findEven(num int) (int, string) {
+	if num%2 == 0 {
+		return num, "is even"
+	}
+	return num, "is odd"
 }
 
 // Has return value of type int32
@@ -74,7 +81,7 @@ func main() {
 	var difference, remainder int32 = test(15, 2)
 	fmt.Println(difference, remainder)
 	fmt.Printf("subtraction is %d and modulus is %d\n", difference, remainder) // C style printf for easier formatting
-	fmt.Printf("subtraction is %v and modulus is %v\n", difference, remainder) // %v is universal, generic for all data types
+	// fmt.Printf("subtraction is %v and modulus is %v\n", difference, remainder) // %v is universal, generic for all data types
 
 	add(x, y)
 
@@ -100,5 +107,12 @@ func main() {
 	fmt.Println("\nRecursion")
 	result := factorial(5)
 	fmt.Println(result)
+
+	fmt.Println(findEven(10))
+	fmt.Println(findEven(11))
+	fmt.Println(findEven(12))
+	fmt.Println(findEven(13))
+	fmt.Println(findEven(14))
+	fmt.Println(findEven(15))
 
 }
