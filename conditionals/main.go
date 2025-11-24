@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"strconv"
 )
 
 func test(a int, b int) (int, int, error) { // Returns 3 things,
@@ -90,5 +91,68 @@ func main() {
 		fmt.Println("Sunday")
 	default:
 		fmt.Println("Invalid day")
+	}
+
+	// More examples. Note: Go has no ternary operators
+	weather := "🌞"
+	if weather == "🌞" {
+		fmt.Println("The weather is sunny")
+	} else {
+		fmt.Println("The weather is not sunny")
+	}
+
+	names := [5]string{"Sam", "John", "Bob", "Mary", "Jane"}
+	// I will check later to know which of the loop syntax is most recommended
+	for i, name := range names {
+		if len(name) <= 3 {
+			fmt.Printf("%d. Hello %s!\n", i, name)
+		} else {
+			fmt.Printf("%d. Hi %s!\n", i, name)
+		}
+	}
+
+	for i := 0; i < len(names); i++ {
+		if len(names[i]) <= 3 {
+			fmt.Printf("%d. Hello %s!\n", i, names[i])
+		} else {
+			fmt.Printf("%d. Hi %s!\n", i, names[i])
+		}
+	}
+
+	stringVar := "500"
+	fmt.Println(stringVar)
+	if convertToInt, err := strconv.Atoi(stringVar); err == nil {
+		fmt.Println("Converted to int:", convertToInt)
+	} else {
+		fmt.Println("Error:", err)
+	}
+	fmt.Println()
+
+	word := "Baby"
+	for i, char := range word {
+		switch char {
+		case 'B', 'b':
+			if char == 'b' {
+				fmt.Printf("lowercase %c at index %d\n", char, i)
+				break
+			}
+			fmt.Printf("uppercase %c at index %d\n", char, i)
+		case 'a':
+			fmt.Println("a at index", i)
+		}
+	}
+
+	// Switch without comparison value
+	for counter := 0; counter < 10; counter++ {
+		switch {
+		case counter == 0:
+			fmt.Println("Zero value")
+		case counter < 3:
+			fmt.Println(counter, "is < 3")
+		case counter >= 3 && counter < 7:
+			fmt.Println(counter, "is >= 3 && < 7")
+		default:
+			fmt.Println(counter, "is >= 7")
+		}
 	}
 }
