@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"reflect"
+	"sort"
 	"time"
 )
 
@@ -23,7 +25,7 @@ func main() {
 	fmt.Println(mySlice)
 	fmt.Printf("The size of the slice is %d and the capacity is %d\n\n", len(mySlice), cap(mySlice))
 
-	mySlice = append(mySlice, 7, 8, 9, 10)
+	mySlice = append(mySlice, 7, 8, 9, 10) // Adds multiple elements
 	fmt.Println(mySlice)
 	fmt.Printf("The size of the slice is %d and the capacity is %d\n\n", len(mySlice), cap(mySlice))
 
@@ -44,7 +46,7 @@ func main() {
 	mySlice3[4] = 75
 	fmt.Println(mySlice3)
 
-	// Add the element from an array using a loop
+	// Add the element from a slice using a loop
 	var mySlice4 []int16
 
 	arr := [5]int16{1, 2, 3, 4, 5}
@@ -68,5 +70,48 @@ func main() {
 	for index, element := range namesSlice {
 		fmt.Printf("%d. %s\n", index, element)
 	}
+
+	// specifying range to copy from an array into a slice
+	items1 := [5]string{"milk", "chocolate", "biscuits", "coke", "kilishi"}
+
+	items2 := items1[1:3:3] // low, high, max
+	items2 = append(items2, "bread")
+
+	items3 := items2
+
+	fmt.Println("items1:", items1)
+	fmt.Println("items1 length:", len(items1), "capacity:", cap(items1))
+
+	fmt.Println("items2:", items2)
+	fmt.Println("items2 length:", len(items2), "capacity:", cap(items2))
+
+	fmt.Println("items3:", items3)
+	fmt.Println("items3 length:", len(items3), "capacity:", cap(items3))
+
+	fmt.Println("Equal:", reflect.DeepEqual(items2, items3)) // true
+	fmt.Println("Equal:", reflect.DeepEqual(items2, items1)) // false
+	fmt.Println()
+
+	// copy(destination, source)
+	nums1 := []int{1, 2, 3, 4, 5}
+	nums2 := []int{6, 7, 8}
+	fmt.Println("nums1:", nums1)
+	fmt.Println("nums1 length:", len(nums1), "capacity:", cap(nums1))
+
+	fmt.Println("nums2:", nums2)
+	fmt.Println("nums2 length:", len(nums2), "capacity:", cap(nums2))
+	fmt.Println()
+
+	copy(nums1, nums2) // output:[6 7 8 4 5] The source elements will replace elements in the destination starting from the beginning
+	fmt.Println("nums1:", nums1)
+	fmt.Println("nums1 length:", len(nums1), "capacity:", cap(nums1))
+
+	// sort()
+	fruits := []string{"Dates", "Watermelon", "Apple", "Banana", "Orange"}
+	fmt.Println("fruits(unsorted):", fruits)
+
+	sort.Strings(fruits)
+
+	fmt.Println("fruits(sorted):", fruits)
 
 }

@@ -60,7 +60,7 @@ func main() {
 	test2 := names
 	fmt.Println(test2)
 	fmt.Println()
-	sameness := names == test2
+	sameness := names == test2 // true
 	fmt.Println(sameness)
 
 	// Pass by value
@@ -82,8 +82,13 @@ func main() {
 	fmt.Println("names:", names)
 	fmt.Println("test3:", *test3)
 
-	// sameness = names == test3 // Error
+	// sameness = names == test3 // Error: type of [3] string != *[3] string
+	fmt.Println()
 
-	fmt.Println(sameness)
+	// Iterating over an array
+	felines := [...]string{"Lion", "Tiger", "Leopard", "Jaguar", "Cougar"}
+	for i, element := range felines {
+		fmt.Printf("%d. %s \n", i, element)
+	}
 
 }

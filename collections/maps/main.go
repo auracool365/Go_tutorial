@@ -4,18 +4,18 @@ import "fmt"
 
 func main() {
 	// Map like in other languages is used to hold data as key-value pairs
-	// Syntax : map[key type] value type{key : value}
-	var countryAndCity = map[string]string{"USA": "New York", "India": "Delhi", "Japan": "Tokyo", "China": "Shanghai"}
+	//Literal Syntax : map[key type] value type{key : value}
+	var countryAndCity = map[string]string{"USA": "New York", "India": "Mumbai", "Japan": "Tokyo", "China": "Shanghai", "Nigeria": "Lagos"}
 	fmt.Println(countryAndCity)
 	fmt.Println(countryAndCity["USA"]) // get the values using the key
+	fmt.Println("size of the map", len(countryAndCity))
 
 	numAndAlphabet := map[uint8]string{1: "a", 2: "b", 3: "c", 4: "d"}
 	fmt.Println(numAndAlphabet)
 	fmt.Println(numAndAlphabet[1])
 
-	// Using make(map[key type] value type)
+	// make() syntax: make(map[key type] value type)
 	sweetFruits := make(map[string]bool)
-
 	sweetFruits["apple"] = true
 	sweetFruits["banana"] = true
 	sweetFruits["lime"] = false
@@ -36,7 +36,7 @@ func main() {
 	}
 	fmt.Println()
 
-	// Using for to print out the data
+	// Looping over maps
 	// only keys
 	for key := range sweetFruits {
 		fmt.Println(key)
@@ -50,7 +50,7 @@ func main() {
 	fmt.Println()
 
 	// both keys and values
-	userAge := map[string]uint8{"Sam": 24, "Cornelius": 27, "Joseph": 24}
+	userAge := map[string]uint8{"Sam": 24, "Cornelius": 27, "Joseph": 24, "David": 70}
 	for name, age := range userAge {
 		fmt.Printf("%s is %d years old\n", name, age)
 	}
@@ -58,5 +58,32 @@ func main() {
 	// Change the value  using the key
 	userAge["Sam"] = 250
 	fmt.Println(userAge)
+	fmt.Println()
 
+	// check if a value exists in the map
+	value, ok := userAge["Sam"] // value = value of the given key, ok = boolean result
+	fmt.Println(value, ok)
+	if ok {
+		fmt.Println("Value:", value)
+	} else {
+		fmt.Println("Key not found, so no value")
+	}
+
+	if value, ok := userAge["Cornelius"]; ok {
+		fmt.Println("Value:", value)
+	} else {
+		fmt.Println("Key not found, so no value")
+	}
+	fmt.Println()
+
+	// Delete value
+	fmt.Println(userAge)
+	delete(userAge, "Sam")
+	fmt.Println(userAge)
+	if value, ok := userAge["Sam"]; ok {
+		fmt.Println("Value:", value)
+	} else {
+		fmt.Println("Key not found, so no value")
+	}
+	fmt.Println()
 }
