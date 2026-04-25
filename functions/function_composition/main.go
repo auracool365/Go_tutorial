@@ -17,10 +17,8 @@ func greetName(getNameFunc func(string) string, getMessageFunc func(string) stri
 	// This returned function is the composed function
 	return func(userName, greetMessage string) string {
 
-		// Step 1: get the name
+		// Get the function parameters
 		name := getNameFunc(userName)
-
-		// Step 2: get the message using the name
 		message := getMessageFunc(greetMessage)
 
 		// Final composed result
@@ -32,5 +30,6 @@ func greetName(getNameFunc func(string) string, getMessageFunc func(string) stri
 func main() {
 	greetings := greetName(getName, getMessage)
 	fmt.Println(greetings("Cornelius", "Hey"))
-	fmt.Println(greetings("Tomisi", "Hello"))
+	fmt.Println(greetings("Tomisin", "Hello"))
+
 }
