@@ -48,6 +48,25 @@ func main() {
 		fmt.Printf("The sum from test() is %d \nThe quotient from test() is %d\n", sum, quotient)
 	}
 
+	// Nested if statements
+	age = 20
+	isCitizen := true
+	hasPVC := true
+
+	if isCitizen {
+		if age >= 18 {
+			if hasPVC {
+				fmt.Println("You can proceed to vote")
+			} else {
+				fmt.Println("You must have a PVC to vote")
+			}
+		} else {
+			fmt.Println("You must be 18 or older to vote")
+		}
+	} else {
+		fmt.Println("You must be a citizen to vote")
+	}
+
 	// Switch statement
 	switch {
 	case errorResult != nil:
@@ -143,7 +162,7 @@ func main() {
 	}
 
 	// Switch without comparison value
-	for counter := 0; counter < 10; counter++ {
+	for counter := range 10 {
 		switch {
 		case counter == 0:
 			fmt.Println("Zero value")
@@ -154,5 +173,24 @@ func main() {
 		default:
 			fmt.Println(counter, "is >= 7")
 		}
+	}
+
+	// Nested switch statements
+	age = 25
+	switch {
+	case age < 18:
+		fmt.Println("You are a minor")
+	case age >= 18 && age < 30:
+		fmt.Println("You are a young adult")
+		switch {
+		case age >= 18 && age < 21:
+			fmt.Println("You are between 18 and 21")
+		case age >= 21 && age < 25:
+			fmt.Println("You are between 21 and 25")
+		default:
+			fmt.Println("You are between 25 and 30")
+		}
+	default:
+		fmt.Println("You are an adult")
 	}
 }
