@@ -5,12 +5,25 @@ import "fmt"
 func main() {
 	// Map like in other languages is used to hold data as key-value pairs
 	//Literal Syntax : map[key type] value type{key : value}
-	var countryAndCity = map[string]string{"USA": "New York", "India": "Mumbai", "Japan": "Tokyo", "China": "Shanghai", "Nigeria": "Lagos"}
+	var countryAndCity = map[string]string{
+		"USA":     "New York",
+		"India":   "Mumbai",
+		"Japan":   "Tokyo",
+		"Germany": "Berlin",
+		"China":   "Shanghai",
+		"Nigeria": "Lagos",
+	}
 	fmt.Println(countryAndCity)
 	fmt.Println(countryAndCity["USA"]) // get the values using the key
 	fmt.Println("size of the map", len(countryAndCity))
 
-	numAndAlphabet := map[uint8]string{1: "a", 2: "b", 3: "c", 4: "d"}
+	numAndAlphabet := map[uint8]string{
+		1: "a",
+		2: "b",
+		3: "c",
+		4: "d",
+		5: "e",
+	}
 	fmt.Println(numAndAlphabet)
 	fmt.Println(numAndAlphabet[1])
 
@@ -29,6 +42,7 @@ func main() {
 	// In cases where it is not sure if the key-value exists. if the check is not implemented then Go will return a
 	// default value for the type e.g "" for strings, 0 for all numerics, false for bool.
 	fruit, isPresent := sweetFruits["mango"]
+
 	if isPresent {
 		fmt.Println(fruit)
 	} else {
@@ -50,7 +64,12 @@ func main() {
 	fmt.Println()
 
 	// both keys and values
-	userAge := map[string]uint8{"Sam": 24, "Cornelius": 27, "Joseph": 24, "David": 70}
+	userAge := map[string]uint8{
+		"Sam":       24,
+		"Cornelius": 27,
+		"Joseph":    24,
+		"David":     70,
+	}
 	for name, age := range userAge {
 		fmt.Printf("%s is %d years old\n", name, age)
 	}

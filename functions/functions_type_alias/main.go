@@ -6,7 +6,7 @@ import "fmt"
 // Assigning a name to a function signature. So, the parameter and result types are not specified every time the function type is
 // used. It is a way to create a new type that represents a function signature, making the code more readable and maintainable.
 // E.g, instead of writing func(int32) int32 everywhere, that signature gets a name, so,any function that takes an int32 and
-// returns an int32 satisfies this type.
+// returns an int32 satisfies this type. Created using the `type` keyword.
 
 type aliasFuncName func(int32) int32
 

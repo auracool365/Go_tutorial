@@ -22,6 +22,27 @@ func counter() func() int {
 	}
 }
 
+// More examples, taken from the Pro Go book
+type calcFunc func(float64) float64
+
+func printPrice(product string, price float64, calculator calcFunc) {
+	fmt.Println("Product:", product, "Price:", calculator(price))
+}
+
+var prizeGiveaway = false
+
+func priceCalcFactory(threshold, rate float64) calcFunc {
+	return func(price float64) float64 {
+		if prizeGiveaway {
+			return 0
+		} else if price > threshold {
+			return price + (price * rate)
+		}
+		return price
+
+	}
+}
+
 func main() {
 
 	// counter() is executed ONCE here
@@ -35,4 +56,43 @@ func main() {
 	fmt.Println(result()) // 2
 	fmt.Println(result()) // 3
 	fmt.Println(result()) // 4
+
+	
+	waterSportProducts := map[string]float64{
+		"Kayak":       275,
+		"Life jacket": 48.95,
+	}
+	soccerProducts := map[string]float64{
+		"Soccer Ball": 19.50,
+		"Stadium":     79500,
+	}
+	prizeGiveaway = false
+	waterCalc := priceCalcFactory(100, 0.2)
+	prizeGiveaway = true
+	soccerCalc := priceCalcFactory(50, 0.1)
+	for product, price := range waterSportProducts {
+		printPrice(product, price, waterCalc)
+	}
+	for product, price := range soccerProducts {
+		printPrice(product, price, soccerCalc)
+	}
+
+	calc := func(price float64) float64 {
+		if price > 100 {
+			return price + (price * 0.2)
+		}
+		return price
+	}
+	for product, price := range waterSportProducts {
+		printPrice(product, price, calc)
+	}
+	calc = func(price float64) float64 {
+		if price > 50 {
+			return price + (price * 0.1)
+		}
+		return price
+	}
+	for product, price := range soccerProducts {
+		printPrice(product, price, calc)
+	}
 }
