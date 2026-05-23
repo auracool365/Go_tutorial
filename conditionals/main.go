@@ -67,6 +67,45 @@ func main() {
 		fmt.Println("You must be a citizen to vote")
 	}
 
+	// Salary increment function; after 2 years increase by 20%, after 7 years, increase by 35%, after 10 years, increase by 55%
+	var salary float32 = 100000.0
+	years := 15
+
+	for i := 1; i <= years; i++ {
+		fmt.Printf("\nYear %d\n", i)
+
+		if i < 3 {
+			fmt.Printf("Your starting salary is $%.2f\n", salary)
+
+		} else if i >= 3 && i <= 6 {
+
+			if i == 3 {
+				salary += salary * 0.20
+				fmt.Printf("Your salary has been increased by 20%% to $%.2f. Congrats!\n", salary)
+				continue
+			}
+			fmt.Printf("Your salary is now $%.2f\n", salary)
+
+		} else if i > 6 && i < 10 {
+
+			if i == 7 {
+				salary += salary * 0.35
+				fmt.Printf("Your salary has been increased by 35%% to $%.2f. Congrats!\n", salary)
+				continue
+			}
+			fmt.Printf("Your salary is now $%.2f\n", salary)
+
+		} else {
+
+			if i == 10 {
+				salary += salary * 0.55
+				fmt.Printf("Your salary has been increased by 55%% to $%.2f. Congrats!\n", salary)
+				continue
+			}
+			fmt.Printf("Your salary is now $%.2f\n", salary)
+		}
+	}
+
 	// Switch statement
 	switch {
 	case errorResult != nil:
@@ -181,14 +220,14 @@ func main() {
 	case age < 18:
 		fmt.Println("You are a minor")
 	case age >= 18 && age < 30:
-		fmt.Println("You are a young adult")
+		fmt.Print("You are a young adult ") // allows continuation on the same line with inner switch output
 		switch {
 		case age >= 18 && age < 21:
-			fmt.Println("You are between 18 and 21")
+			fmt.Println("between ages 18 and 21")
 		case age >= 21 && age < 25:
-			fmt.Println("You are between 21 and 25")
+			fmt.Println("between ages 21 and 25")
 		default:
-			fmt.Println("You are between 25 and 30")
+			fmt.Println("between ages 25 and 30")
 		}
 	default:
 		fmt.Println("You are an adult")

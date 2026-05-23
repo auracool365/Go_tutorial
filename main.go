@@ -13,6 +13,11 @@ func introduce(name string) {
 	fmt.Println("Hi, my name is", name)
 }
 
+func add(a int, b int) int {
+	fmt.Println("Hi")
+	return a + b
+}
+
 func main() {
 	userName := "Cornelius"
 	const message string = "Hi"
