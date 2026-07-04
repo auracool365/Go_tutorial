@@ -48,7 +48,7 @@ func main() {
 	// continue statement
 	for i := 0; i <= count; i++ {
 		if i == 3 {
-			fmt.Println("❌Skipped because of continue")
+			fmt.Println("Skipped because of continue")
 			continue
 		}
 		fmt.Println(i)
@@ -56,6 +56,12 @@ func main() {
 	fmt.Println()
 
 	// Loops for enumeration
+	// Looping through a string
+	str := "Hello, World!"
+	for i, char := range str {
+		fmt.Printf("Index: %d, Character: %c\n", i, char)
+	}
+
 	name := "Cornelius"
 	for i, character := range name { // (i) get the index from range, character gets the values from the string
 		fmt.Printf("%d. %c \n", i, character)
@@ -71,6 +77,7 @@ func main() {
 		fmt.Println("index:", i)
 	}
 
+	// Looping through an array
 	fruits := [...]string{"apple", "peach", "pear", "watermelon", "guava"}
 	for i, fruit := range fruits {
 		fmt.Printf("%d. %s \n", i, fruit)
@@ -103,5 +110,183 @@ target: // Label
 	counter++
 	if counter < 10 {
 		goto target
+	}
+	fmt.Println()
+
+	
+	// While loop using for
+	counter2 := 0
+	for counter2 < 10 {
+		fmt.Println("Counter2", counter2)
+		counter2++
+	}
+
+	// Infinite loop
+	// for {
+	// 	fmt.Println("This is an infinite loop")
+	// }
+	fmt.Println()
+
+
+	// Nested loops
+	for i := 1; i <= 3; i++ {
+		for j := 1; j <= 3; j++ {
+			fmt.Printf("i: %d, j: %d\n", i, j)
+		}
+	}
+	fmt.Println()
+
+
+	// Looping through a slice
+	slice := []string{"apple", "peach", "pear", "watermelon", "guava"}
+	for i, fruit := range slice {
+		fmt.Printf("%d. %s \n", i, fruit)
+	}
+	fmt.Println()
+	// Looping through a map
+	fruitColors := map[string]string{
+		"apple":      "red",
+		"peach":      "orange",
+		"pear":       "green",
+		"watermelon": "green and red",
+		"guava":      "green and yellow",
+	}
+
+	for fruit, color := range fruitColors {
+		fmt.Printf("The color of %s is %s\n", fruit, color)
+	}
+	fmt.Println()
+
+
+	// Looping through a channel
+	fruitChannel := make(chan string, 5)
+	fruitChannel <- "apple"
+	fruitChannel <- "peach"
+	fruitChannel <- "pear"
+	fruitChannel <- "watermelon"
+	fruitChannel <- "guava"
+	close(fruitChannel)
+
+	for fruit := range fruitChannel {
+		fmt.Println(fruit)
+	}
+	fmt.Println()
+
+	// Looping through a struct
+	type Fruit struct {
+		Name  string
+		Color string
+	}
+
+	fruitsStruct := []Fruit{
+		{"apple", "red"},
+		{"peach", "orange"},
+		{"pear", "green"},
+		{"watermelon", "green and red"},
+		{"guava", "green and yellow"},
+	}
+	fmt.Println(fruitsStruct)
+
+	for i, fruit := range fruitsStruct {
+		fmt.Printf("%d. %s is %s\n", i, fruit.Name, fruit.Color)
+	}
+	fmt.Println()
+
+	// Looping through a pointer
+	type FruitPointer struct {
+		Name  string
+		Color string
+	}
+
+	fruitsPointer := []*FruitPointer{
+		{"apple", "red"},
+		{"peach", "orange"},
+		{"pear", "green"},
+		{"watermelon", "green and red"},
+		{"guava", "green and yellow"},
+	}
+
+	for i, fruit := range fruitsPointer {
+		fmt.Printf("%d. %s is %s\n", i, fruit.Name, fruit.Color)
+	}
+	fmt.Println()
+
+	// Looping through a slice of structs
+	type FruitStruct struct {
+		Name  string
+		Color string
+	}
+
+	fruitsSliceStruct := []FruitStruct{
+		{"apple", "red"},
+		{"peach", "orange"},
+		{"pear", "green"},
+		{"watermelon", "green and red"},
+		{"guava", "green and yellow"},
+	}
+
+	for i, fruit := range fruitsSliceStruct {
+		fmt.Printf("%d. %s is %s\n", i, fruit.Name, fruit.Color)
+	}
+	fmt.Println()
+
+	// Looping through a slice of pointers to structs
+	type FruitPointerStruct struct {
+		Name  string
+		Color string
+	}
+
+	fruitsSlicePointerStruct := []*FruitPointerStruct{
+		{"apple", "red"},
+		{"peach", "orange"},
+		{"pear", "green"},
+		{"watermelon", "green and red"},
+		{"guava", "green and yellow"},
+	}
+
+	for i, fruit := range fruitsSlicePointerStruct {
+		fmt.Printf("%d. %s is %s\n", i, fruit.Name, fruit.Color)
+	}
+	fmt.Println()
+
+	// Looping through a slice of slices
+	sliceOfSlices := [][]string{
+		{"apple", "peach", "pear"},
+		{"watermelon", "guava"},
+	}
+
+	for i, slice := range sliceOfSlices {
+		fmt.Printf("%d. %v\n", i, slice)
+		for j, fruit := range slice {
+			fmt.Printf("  %d.%d. %s\n", i, j, fruit)
+		}
+	}
+	fmt.Println()
+
+	// Looping through a slice of maps
+	sliceOfMaps := []map[string]string{
+		{"apple": "red", "peach": "orange"},
+		{"pear": "green", "watermelon": "green and red"},
+	}
+
+	for i, fruitMap := range sliceOfMaps {
+		fmt.Printf("%d. %v\n", i, fruitMap)
+		for fruit, color := range fruitMap {
+			fmt.Printf("  %d.%s is %s\n", i, fruit, color)
+		}
+	}
+	fmt.Println()
+
+	// Looping through a slice of channels
+	sliceOfChannels := []chan string{
+		make(chan string, 1),
+		make(chan string, 1),
+	}
+
+	sliceOfChannels[0] <- "apple"
+	sliceOfChannels[1] <- "peach"
+
+	for i, fruitChannel := range sliceOfChannels {
+		fmt.Printf("%d. %s\n", i, <-fruitChannel)
 	}
 }

@@ -35,14 +35,17 @@ func (person Person) getAge() (string, uint8, string) {
 
 // This is a normal function and cannot be attached to the struct objects.
 func canVote(person Person, age uint8) string {
-	if age >= 18 {
-		return person.firstName + " can vote"
+	if age >= 18 && age <= 90 {
+		return fmt.Sprintf("at age %d, %s can vote", age, person.firstName)
+	} 
+	if age > 90 {
+		return fmt.Sprintf("at age %d, %s can vote, but may be too old to exercise that right", age, person.firstName)
 	}
-	return person.firstName + " cannot vote"
+	return fmt.Sprintf("at age %d, %s cannot vote", age, person.firstName)
 }
 
-// Create a struct of products and their prices, Store adds items to database, user can add items to cart, and 
-// checkout to get the total price of the items in the cart, with the option to remove items from the cart before 
+// Create a struct of products and their prices, Store adds items to database, user can add items to cart, and
+// checkout to get the total price of the items in the cart, with the option to remove items from the cart before
 // checkout. quantity, discounts, etc.
 
 // Product struct
@@ -56,9 +59,9 @@ type Cart struct {
 	products []Product
 }
 
-// store struct(database using a slice to hold products) 
+// store struct(database using a slice to hold products)
 type Store struct {
-	products []Product 
+	products []Product
 }
 
 // Add product to store
@@ -98,10 +101,7 @@ func (c *Cart) checkout() float64 {
 		total += product.price
 	}
 	return total
-}	
-
-
-
+}
 
 func main() {
 	person1 := Person{
@@ -174,16 +174,16 @@ func main() {
 	fmt.Println(person4.getAge())
 	person4.greet()
 
-	// Product, Store and Cart 
-	// Field names can be ignored if the values are assigned in the same order as they are defined in the 
+	// Product, Store and Cart
+	// Field names can be ignored if the values are assigned in the same order as they are defined in the
 	// struct (Not recommended due to poor readability and error-prone if mixed up)
-	product1 := Product{"Laptop", 999.99} 
+	product1 := Product{"Laptop", 999.99}
 	product2 := Product{"Smartphone", 499.99}
 	product3 := Product{"Headphones", 199.99}
 	product4 := Product{"Monitor", 299.99}
 	product5 := Product{"Keyboard", 99.99}
 	product6 := Product{"Mouse", 49.99}
-	
+
 	store := Store{}
 	store.addProduct(product1)
 	store.addProduct(product2)
@@ -207,6 +207,6 @@ func main() {
 	fmt.Println("\nCart products after removal:", cart.products)
 
 	total = cart.checkout()
-	fmt.Printf("Total price after removal: $%.2f\n", total)	
+	fmt.Printf("Total price after removal: $%.2f\n", total)
 
 }

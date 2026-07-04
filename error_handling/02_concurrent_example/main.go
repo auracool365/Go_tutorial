@@ -23,9 +23,7 @@ func (m *MultiError) Error() string {
 
 	for i, err := range m.Errors {
 
-		builder.WriteString(
-			fmt.Sprintf("%d. %v\n", i+1, err),
-		)
+		fmt.Fprintf(&builder, "%d. %v\n", i+1, err)
 	}
 
 	return builder.String()
