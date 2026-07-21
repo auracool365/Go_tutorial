@@ -89,4 +89,16 @@ func main() {
 	changeName(&name1)
 	fmt.Println(name1)
 
+	// inferred pointer type
+	name2 := "Adele"
+	fmt.Println(name2)
+
+	testPtr := &name2 // inferred pointer type, since the variable is initialized with a pointer to string
+	*testPtr = "Adeleke"
+	fmt.Println(name2)
+
+	name2Ptr := changeName(&name2) // inferred pointer type, since the function returns a pointer to string
+	fmt.Println(name2)
+	fmt.Println(*name2Ptr)
+
 }

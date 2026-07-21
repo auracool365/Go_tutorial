@@ -45,6 +45,31 @@ func checkAnimal(animal Animal) {
 	}
 }
 
+// More tricky examples 
+// Measurable interface 
+type Measurable interface {
+	Value() float64
+}
+
+// Temperature is a custom type based on float64 
+type Temperature float64
+
+// Value receiver:  reads the number, doesn't need to touch anything
+func (t Temperature) Value() float64 {
+	return float64(t)
+}
+
+// Room is a struct
+type Room struct {
+	Width  float64
+	Height float64
+}
+
+// Pointer receiver
+func (r *Room) Value() float64 {
+	return r.Width * r.Height
+}
+
 func main() {
 	dog1 := Dog{name: "Edge", age: 2}
 	ostrich1 := Ostrich{name: "Colo", age: 5}
@@ -60,11 +85,25 @@ func main() {
 	checkAnimal(dog1)
 	checkAnimal(ostrich1)
 
-	//
+	// Animal interface example	 
 	animals := []Animal{dog1, ostrich1}
 	for _, animal := range animals {
 		fmt.Println(animal.sound())
 		animal.move()
 	}
+
+	// Measurable interface example
+	var measure Measurable
+
+	temparature := Temperature(98.6)
+	measure = temparature
+	fmt.Println("\nTemperature:", measure.Value()) // OK: Temperature (value) implements Measurable 
+
+	room := &Room{Width: 10, Height: 20}
+	measure = room
+	fmt.Println("Room area:", measure.Value()) // OK: *Room (pointer) implements Measurable	
+
+	// measure = Room{Width: 5, Height: 15} // FAILS: Room (value, not pointer) does NOT implement Measurable
+	
 
 }

@@ -115,9 +115,9 @@ target: // Label
 
 	
 	// While loop using for
-	counter2 := 0
-	for counter2 < 10 {
-		fmt.Println("Counter2", counter2)
+	counter2 := 1
+	for counter2 <= 10 {
+		fmt.Println("Counter2: ", counter2)
 		counter2++
 	}
 

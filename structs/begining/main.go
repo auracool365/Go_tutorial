@@ -44,6 +44,40 @@ func canVote(person Person, age uint8) string {
 	return fmt.Sprintf("at age %d, %s cannot vote", age, person.firstName)
 }
 
+// Difference between methods and normal functions is that methods are bound to the receiver, which is the struct object, and can access 
+// its fields and other methods. Normal functions are not bound to any receiver and cannot access the fields of a struct directly. Methods can be 
+// called on struct instances, while normal functions are called independently.
+
+type Rectangle struct {
+	Width  float64
+	Height float64
+}
+
+// Method to calculate the area of the rectangle
+func (r Rectangle) Area() float64 {
+	return r.Width * r.Height
+}
+
+// Method to calculate the perimeter of the rectangle
+func (r Rectangle) Perimeter() float64 {
+	return 2 * (r.Width + r.Height)
+}
+
+// Normal function to calculate the area of the rectangle
+func CalculateArea(r Rectangle) float64 {
+	return r.Width * r.Height
+}
+
+// Normal function to calculate the perimeter of the rectangle
+func CalculatePerimeter(r Rectangle) float64 {
+	return 2 * (r.Width + r.Height)
+}
+
+// Just a normal function 
+func add(a, b int) int {
+	return a + b
+}
+
 // Create a struct of products and their prices, Store adds items to database, user can add items to cart, and
 // checkout to get the total price of the items in the cart, with the option to remove items from the cart before
 // checkout. quantity, discounts, etc.
@@ -209,4 +243,23 @@ func main() {
 	total = cart.checkout()
 	fmt.Printf("Total price after removal: $%.2f\n", total)
 
+	// Demonstrating the use of methods and normal functions to calculate area and perimeter of a rectangle
+	rect := Rectangle{Width: 5, Height: 10}
+
+	// Using methods bound to the Rectangle struct
+	fmt.Printf("\nUsing methods:\n")
+	fmt.Printf("Area of rectangle: %.2f\n", rect.Area())
+	fmt.Printf("Perimeter of rectangle: %.2f\n", rect.Perimeter())
+
+	// Using normal functions on the struct, but not bound to the Rectangle struct
+	fmt.Printf("\nUsing normal functions:\n")
+	fmt.Printf("Area of rectangle: %.2f\n", CalculateArea(rect))
+	fmt.Printf("Perimeter of rectangle: %.2f\n", CalculatePerimeter(rect))
+
+	// normal add() function
+	a, b := 5, 10
+	sum := add(a, b)
+	fmt.Printf("\nThe sum of %d and %d is: %d\n", a, b, sum)
+
 }
+

@@ -118,4 +118,22 @@ func main() {
 		fmt.Println("Parse Error:", parseErr)
 	}
 
+	fmt.Println()
+
+	// 3. String methods from the strings package
+	str := "   Hello, World!   "
+	fmt.Println("The string in uppercase is:", strings.ToUpper(str))
+	fmt.Println("The string in lowercase is:", strings.ToLower(str))
+	fmt.Println("The string with leading whitespace removed is:", strings.TrimLeft(str, " "))
+	fmt.Println("The string with trailing whitespace removed is:", strings.TrimRight(str, " "))
+	fmt.Println("The string with leading and trailing whitespace removed is:", strings.TrimSpace(str))
+	fmt.Println("The string with 'World' replaced by 'Go' is:", strings.Replace(str, "World", "Go", 1))
+	fmt.Println("The string split into a slice of substrings is:", strings.Split(str, ","))
+	fmt.Println("The string contains 'Hello':", strings.Contains(str, "Hello"))
+	fmt.Println("The string starts with 'Hello':", strings.HasPrefix(str, "Hello"))
+	fmt.Println("The string ends with 'World!':", strings.HasSuffix(str, "World!"))
+	fmt.Println("The index of 'World' in the string is:", strings.Index(str, "World"))
+	fmt.Println("The last index of 'o' in the string is:", strings.LastIndex(str, "o"))
+	fmt.Println("The string repeated 3 times is:", strings.Repeat(str, 3))
+	fmt.Println("The string with all whitespace replaced by '-' is:", strings.Join(strings.Fields(str), "-"))
 }
